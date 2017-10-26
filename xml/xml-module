@@ -1,3 +1,4 @@
+```PowerShell
 function new-xml {
 Param (
     [parameter(Mandatory=$true,
@@ -122,3 +123,5 @@ $doc.data.website[2].value
 $doc.Save($filePath)
 
 #>
+
+```

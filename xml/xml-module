@@ -1,0 +1,24 @@
+$filePath = "$env:HOMEPATH\Desktop\Document.xml"
+$xmlinfo = @"
+<?xml version="1.0" encoding="utf-8"?>
+<data/>
+"@
+
+$doc = New-Object System.Xml.XmlDocument
+$doc.Load($filePath)
+$doc.DocumentElement.RemoveAll()
+$notes = ("https://www.bing.com","Default for Edge"),("https://www.google.com","Default for Chrome"),("https://www.google.com","Default for Firefox")
+$count = 0
+
+Foreach($object in $notes){
+    $child = $doc.CreateElement("website")
+    $child.SetAttribute("index",$count)
+    $child.SetAttribute("value",$object[0])
+    $child.SetAttribute("note", $object[1])
+    $doc.DocumentElement.AppendChild($child)
+    $count++
+}
+$doc.Save($filePath)
+$doc.data.website[2].value = "https://www.yahoo.com"
+$doc.data.website[2].value
+$doc.Save($filePath)
